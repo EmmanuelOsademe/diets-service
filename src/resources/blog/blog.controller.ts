@@ -19,6 +19,8 @@ import {
   fetchBlogsSchema,
   updateBlogSchema,
 } from "./blog.validation";
+import { result } from "lodash";
+import { IBlog } from "./blog.model";
 
 class BlogController implements Controller {
   public path = "/blogs";
@@ -125,8 +127,12 @@ class BlogController implements Controller {
     const queryOptions = req.query;
 
     try {
-      const result = await this.blogService.fetchBlogs(queryOptions);
-      res.status(StatusCodes.OK).json(result);
+      const result = (await this.blogService.fetchBlogs(queryOptions)) as {
+        blogs: IBlog[];
+        numOfPages: number;
+      };
+      console.log(result.blogs.length);
+      res.status(StatusCodes.OK).json({ ...result });
     } catch (e: any) {
       next(new HttpException(StatusCodes.BAD_REQUEST, e.message));
     }
