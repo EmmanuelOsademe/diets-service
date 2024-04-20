@@ -135,11 +135,12 @@ class BlogService {
           model: this.commentModel,
         })
         .skip(skipAmount)
-        .limit(numericPage)
+        .limit(numericPageSize)
         .sort(sortOptions);
 
       const totalBlogs = await this.blogModel.countDocuments(query);
       const numOfPages = Math.ceil(totalBlogs / numericPageSize);
+
       return { blogs, numOfPages };
     } catch (e: any) {
       log.error(e.message);
