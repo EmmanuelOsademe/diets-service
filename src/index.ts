@@ -6,6 +6,7 @@ import UserController from "@/resources/user/user.controller";
 import SessionController from "@/resources/session/session.controller";
 import BlogController from "@/resources/blog/blog.controller";
 import MessageController from "@/resources/message/message.controller";
+import AppointmentController from "./resources/appointments/appointment.controller";
 
 validateEnv();
 
@@ -15,6 +16,7 @@ const app = new App(
     new SessionController(),
     new BlogController(),
     new MessageController(),
+    new AppointmentController(),
   ],
   Number(process.env.PORT)
 );
