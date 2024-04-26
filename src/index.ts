@@ -18,6 +18,6 @@ const app = new App(
     new MessageController(),
     new AppointmentController(),
   ],
-  Number(process.env.PORT)
+  Number(process.env.PORT || 5003)
 );
 app.listen();
